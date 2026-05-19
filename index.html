@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chá de Baby - Levi</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,13 +15,11 @@
             --cor-botao: #8fa697;
             --cor-rosa: #f8e1e1;
             --cor-ouro: #d4af37;
+            --cor-verde: #8fa697;
+            --cor-creme: #f5efe8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Lato', sans-serif;
@@ -34,56 +30,37 @@
             min-height: 100vh;
         }
 
-        h1,
-        h2,
-        h3 {
-            font-family: 'Playfair Display', serif;
-            color: #333;
-        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: #333; }
 
         .fonte-script {
             font-family: 'Dancing Script', cursive;
             color: var(--cor-destaque);
         }
 
-        /* Corações flutuantes */
-        .coracao {
+        /* ========== PARTÍCULAS FLUTUANTES ========== */
+        .particula {
             position: fixed;
-            font-size: 20px;
-            color: var(--cor-rosa);
-            animation: flutuar 6s ease-in infinite;
-            opacity: 0;
             pointer-events: none;
             z-index: 0;
+            animation: flutuar-particula linear infinite;
+            opacity: 0;
         }
 
-        @keyframes flutuar {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.6;
-            }
-
-            90% {
-                opacity: 0.2;
-            }
-
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
+        @keyframes flutuar-particula {
+            0%   { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+            5%   { opacity: 0.7; }
+            95%  { opacity: 0.2; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
+        /* ========== CONTAINER ========== */
         .container {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 15px;
             background: #fff;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 50px rgba(212, 165, 116, 0.15);
             min-height: 100vh;
             position: relative;
             z-index: 1;
@@ -91,247 +68,310 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- BIBI INTERATIVO --- */
+        /* ========== BIBI MELHORADO ========== */
         .bebi-wrapper {
             position: fixed;
-            top: 820px;
+            bottom: 30px;
             right: 20px;
             z-index: 1000;
             cursor: pointer;
             animation: flutuarBebi 3s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(212, 165, 116, 0.4));
         }
 
         @keyframes flutuarBebi {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25%       { transform: translateY(-6px) rotate(-2deg); }
+            75%       { transform: translateY(-3px) rotate(2deg); }
         }
 
-        .bebi-wrapper.feliz {
-            animation: pular 0.5s ease;
-        }
+        .bebi-wrapper.feliz { animation: pular 0.5s ease; }
 
         @keyframes pular {
-
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            50% {
-                transform: scale(1.2) rotate(10deg);
-            }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            30%       { transform: scale(1.15) rotate(-8deg); }
+            60%       { transform: scale(1.2) rotate(8deg); }
         }
 
+        .bebi-wrapper.dormindo .bebi-cabeca { opacity: 0.85; }
+
         .bebi {
-            width: 60px;
-            height: 75px;
+            width: 68px;
+            height: 85px;
             position: relative;
         }
 
+        /* Cabecinha */
         .bebi-cabeca {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(145deg, #fff5f5, #ffe4e1);
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(145deg, #fff8f6, #ffe9e4);
             border-radius: 50%;
             position: absolute;
             top: 0;
-            left: 5px;
-            border: 3px solid #ffd6d6;
-            box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.05);
+            left: 6px;
+            border: 2.5px solid #ffc9c4;
+            box-shadow: inset -4px -4px 12px rgba(0,0,0,0.06), 0 4px 12px rgba(212,165,116,0.2);
+            transition: background 0.3s;
         }
 
+        /* Olhos */
         .olhos-container {
             position: absolute;
-            top: 15px;
-            left: 10px;
-            width: 30px;
+            top: 17px;
+            left: 11px;
+            width: 34px;
             display: flex;
             justify-content: space-between;
         }
 
         .olho {
-            width: 12px;
-            height: 12px;
-            background: #333;
+            width: 11px;
+            height: 11px;
+            background: #2d2d2d;
             border-radius: 50%;
             position: relative;
+            transition: transform 0.1s ease;
         }
 
         .olho::after {
             content: '';
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 3.5px;
+            height: 3.5px;
             background: white;
             border-radius: 50%;
             top: 2px;
             right: 2px;
         }
 
-        .bebi.feliz .boca {
-            height: 10px;
-            border-radius: 0 0 50% 50%;
-            border: 3px solid #e88;
-            border-top: none;
+        /* Olhos fechados (dormindo) */
+        .bebi-wrapper.dormindo .olho {
+            height: 3px;
+            border-radius: 0 0 3px 3px;
+            background: #555;
+            margin-top: 4px;
         }
+        .bebi-wrapper.dormindo .olho::after { display: none; }
 
+        /* Bochechas */
+        .bochecha {
+            position: absolute;
+            width: 10px;
+            height: 7px;
+            background: rgba(255, 140, 140, 0.3);
+            border-radius: 50%;
+            top: 30px;
+        }
+        .bochecha-esq { left: 6px; }
+        .bochecha-dir { right: 6px; }
+
+        /* Boca */
         .boca {
-            width: 14px;
-            height: 14px;
-            border: 2px solid #e88;
-            border-radius: 50%;
+            width: 16px;
+            height: 8px;
+            border: 2.5px solid #e07070;
+            border-top: none;
+            border-radius: 0 0 50% 50%;
             position: absolute;
-            top: 26px;
-            left: 18px;
+            top: 30px;
+            left: 20px;
             background: transparent;
+            transition: all 0.3s;
         }
 
+        .bebi.feliz .boca {
+            width: 20px;
+            height: 11px;
+            border: 2.5px solid #e07070;
+            border-top: none;
+            border-radius: 0 0 50% 50%;
+            top: 29px;
+            left: 18px;
+        }
+
+        .bebi-wrapper.dormindo .boca {
+            border-radius: 50%;
+            height: 6px;
+            border: 2px solid #e07070;
+        }
+
+        /* Zzzs dormindo */
+        .zzz {
+            position: absolute;
+            top: -18px;
+            right: -5px;
+            font-size: 12px;
+            color: var(--cor-destaque);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+        }
+        .bebi-wrapper.dormindo .zzz { opacity: 1; animation: zzz-flutuar 1.5s ease-in-out infinite; }
+        @keyframes zzz-flutuar {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-10px); opacity: 0; }
+        }
+
+        /* Orelhas */
         .orelha {
-            width: 12px;
-            height: 15px;
-            background: #ffd6d6;
+            width: 13px;
+            height: 18px;
+            background: linear-gradient(#ffe4df, #ffc9c4);
             border-radius: 50%;
             position: absolute;
-            top: 10px;
+            top: 12px;
+            box-shadow: inset 3px 2px 6px rgba(255,255,255,0.5);
         }
+        .orelha-esq { left: 3px; }
+        .orelha-dir { right: 3px; }
 
-        .orelha-esq {
-            left: 0;
-        }
-
-        .orelha-dir {
-            right: 0;
-        }
-
+        /* Laço */
         .laco {
             position: absolute;
-            top: -8px;
-            left: 15px;
+            top: -10px;
+            left: 17px;
             width: 30px;
-            height: 15px;
+            height: 16px;
         }
-
-        .laco::before,
-        .laco::after {
+        .laco::before, .laco::after {
             content: '';
             position: absolute;
-            width: 15px;
-            height: 15px;
-            background: var(--cor-destaque);
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at 30% 30%, #e8b880, var(--cor-destaque));
             border-radius: 50% 50% 50% 0;
-            transform: rotate(-45deg);
         }
-
-        .laco::after {
-            left: 15px;
-            transform: rotate(45deg) scaleX(-1);
-        }
+        .laco::before { transform: rotate(-45deg); }
+        .laco::after  { left: 14px; transform: rotate(45deg) scaleX(-1); }
 
         .laco-centro {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             background: var(--cor-ouro);
             border-radius: 50%;
-            top: 5px;
+            top: 4px;
             left: 11px;
             z-index: 2;
+            box-shadow: 0 0 6px rgba(212,175,55,0.5);
         }
 
+        /* Corpo */
         .corpo {
-            width: 40px;
-            height: 28px;
-            background: #fff;
+            width: 46px;
+            height: 32px;
+            background: linear-gradient(180deg, #fff 0%, #f9f0ff 100%);
             border-radius: 15px 15px 0 0;
             position: absolute;
             bottom: 0;
-            left: 10px;
-            border: 3px solid #eee;
+            left: 11px;
+            border: 2.5px solid #ede;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+        }
+
+        .corpo::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            height: 6px;
+            background: repeating-linear-gradient(90deg, #f3d6f5 0px, #f3d6f5 3px, #e8c8ff 3px, #e8c8ff 6px);
+            opacity: 0.5;
         }
 
         .corpo::after {
             content: '♥';
             color: var(--cor-rosa);
-            font-size: 12px;
+            font-size: 14px;
+            animation: heartbeat 1.5s ease-in-out infinite;
         }
 
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            30%       { transform: scale(1.15); }
+            60%       { transform: scale(0.95); }
+        }
+
+        /* Balão de fala */
         .balao-fala {
             position: absolute;
-            top: -45px;
-            left: -90px;
+            bottom: 95px;
+            right: 0px;
             background: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 10px 16px;
+            border-radius: 18px 18px 0 18px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
             font-size: 13px;
             white-space: nowrap;
             opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
+            transform: scale(0.7) translateY(10px);
+            transform-origin: bottom right;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             pointer-events: none;
+            border: 1.5px solid #f5e8e8;
+            color: #555;
+            font-weight: 600;
         }
 
         .balao-fala.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
 
-        .balao-fala::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 20px;
-            border: 10px solid transparent;
-            border-top-color: white;
-        }
-
+        /* ========== HEADER ========== */
         header {
             text-align: center;
             padding: 50px 15px 30px;
             border-bottom: 2px dashed var(--cor-rosa);
+            position: relative;
+            overflow: hidden;
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 5px;
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cor-rosa), var(--cor-destaque), var(--cor-verde), var(--cor-destaque), var(--cor-rosa));
+            background-size: 200%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0%   { background-position: 0%; }
+            100% { background-position: 200%; }
         }
 
         header .subtitulo {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--cor-destaque);
             margin-bottom: 15px;
         }
 
+        header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+
         header .nome-bebe {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             margin: 10px 0;
+            background: linear-gradient(135deg, var(--cor-destaque), #c49464, var(--cor-ouro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         header .data {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #888;
             display: flex;
             align-items: center;
@@ -339,153 +379,247 @@
             gap: 8px;
         }
 
+        /* Badge festivo */
+        .badge-evento {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cor-rosa), #fdd);
+            border: 1.5px solid var(--cor-destaque);
+            border-radius: 30px;
+            padding: 5px 16px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cor-destaque);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        /* ========== COUNTDOWN ========== */
+        .countdown-section {
+            padding: 18px 15px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff8f4, var(--cor-creme));
+            border-radius: 20px;
+            margin: 15px 0;
+            border: 1.5px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .countdown-section p {
+            font-size: 0.8rem;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .countdown-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .c-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 62px;
+        }
+
+        .c-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cor-destaque);
+            background: white;
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(212,165,116,0.15);
+            border: 1.5px solid rgba(212,165,116,0.2);
+            transition: transform 0.2s;
+        }
+
+        .c-box:hover .c-num { transform: scale(1.05); }
+
+        .c-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bbb;
+            margin-top: 5px;
+        }
+
+        /* ========== INFO GRID ========== */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            padding: 25px 0;
+            padding: 20px 0;
         }
 
         .info-card {
             background: var(--cor-bg);
-            padding: 20px 10px;
-            border-radius: 15px;
+            padding: 18px 10px;
+            border-radius: 16px;
             text-align: center;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            cursor: default;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
             border-color: var(--cor-destaque);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 24px rgba(212,165,116,0.15);
+            background: white;
         }
 
         .info-card i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--cor-destaque);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        .info-card h3 {
-            font-size: 0.9rem;
+        .info-card h3 { font-size: 0.85rem; margin-bottom: 4px; }
+        .info-card p  { font-size: 0.78rem; color: #888; }
+
+        /* ========== CURIOSIDADES / FATOS DO BEBÊ ========== */
+        .fatos-section {
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        .fatos-section h2 {
+            font-size: 1.3rem;
+            color: var(--cor-destaque);
             margin-bottom: 5px;
         }
 
-        .info-card p {
-            font-size: 0.8rem;
-            color: #888;
+        .fatos-section > p {
+            font-size: 0.82rem;
+            color: #bbb;
+            margin-bottom: 18px;
         }
-    </style>
-</head>
 
-<body>
-    <div id="fundo-coracoes"></div>
-    <div class="container">
-        <!-- BIBI -->
-        <div class="bebi-wrapper" id="bebi" onclick="interagirBebi()">
-            <div class="balao-fala" id="balao">Olá! ❤️</div>
-            <div class="bebi" id="corpo-bebi">
-                <div class="laco">
-                    <div class="laco-centro"></div>
-                </div>
-                <div class="orelha orelha-esq"></div>
-                <div class="orelha orelha-dir"></div>
-                <div class="bebi-cabeca">
-                    <div class="olhos-container">
-                        <div class="olho" id="olho-esq"></div>
-                        <div class="olho" id="olho-dir"></div>
-                    </div>
-                    <div class="boca"></div>
-                </div>
-                <div class="corpo"></div>
-            </div>
-        </div>
-        <header>
-            <p class="subtitulo">Você está convidado</p>
-            <h1>Chá de Baby</h1>
-            <h2 class="fonte-script nome-bebe">Levi</h2>
-            <div class="data"><i class="far fa-calendar-alt"></i>15 de Agosto de 2026 • 15h00</div>
-        </header>
-        <section class="info-grid">
-            <div class="info-card"><i class="far fa-clock"></i>
-                <h3>Horário</h3>
-                <p>15h00 às 19h00</p>
-            </div>
-            <div class="info-card"><i class="fas fa-map-marker-alt"></i>
-                <h3>Local</h3>
-                <p>Rua Pastor Dong Joo Park, 165<br>Hortolândia - SP</p>
-            </div>
-            <div class="info-card"><i class="fas fa-gift"></i>
-                <h3>Dica</h3>
-                <p>Fraldas e roupinhas<br>são sempre úteis!</p>
-            </div>
-        </section>
+        .fato-card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(212,165,116,0.1);
+            border: 1.5px solid rgba(212,165,116,0.15);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-        <!-- LISTA DE PRESENTES -->
-        <section class="gift-section">
-            <h2><i class="fas fa-baby"></i> Lista de Presentes</h2>
-            <ul class="gift-list">
-                <li class="gift-item">
-                    <img src="https://cdn-icons-png.flaticon.com/128/1702/1702254.png" alt="Fraldas">
-                    <span>Kit Fraldas</span>
-                    <a href="#" class="btn-ver" target="_blank">Ver</a>
-                </li>
-                <li class="gift-item">
-                    <img src="https://cdn-icons-png.flaticon.com/128/7154/7154822.png" alt="Pomada">
-                    <span>Kit Saúde Bebê</span>
-                    <a href="#" class="btn-ver" target="_blank">Ver</a>
-                </li>
-                <li class="gift-item">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5618/5618184.png" alt="Mamadeira">
-                    <span>Kit Amamentação</span>
-                    <a href="#" class="btn-ver" target="_blank">Ver</a>
-                </li>
-                <li class="gift-item">
-                    <img src="https://cdn-icons-png.flaticon.com/128/4464/4464131.png" alt="Mamadeira">
-                    <span>Conjunto Macacãozinho</span>
-                    <a href="#" class="btn-ver" target="_blank">Ver</a>
-                </li>
-            </ul>
-            <div class="pix-box">
-                <p>Ou contribua com PIX:</p>
-                <p class="chave">(19) 98858-5953</p>
-            </div>
-        </section>
+        .fato-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212,165,116,0.07), transparent);
+            transition: left 0.5s ease;
+        }
 
-        <!-- RSVP -->
-        <section class="rsvp-section">
-            <h2>Confirme sua Presença</h2>
-            <p>Contamos com você!</p>
-            <form action="https://formspree.io/f/SEU_CODIGO" method="POST">
-                <input type="text" name="nome" placeholder="Seu Nome" required>
-                <select name="confirmacao">
-                    <option value="Sim">✔️ Sim, vou ir!</option>
-                    <option value="Não">❌ Não vou poder ir</option>
-                </select>
-                <input type="number" name="acompanhantes" placeholder="Quantos acompanhantes?" min="0">
-                <textarea name="mensagem" placeholder="Deixe uma msg..." rows="3"></textarea>
-                <button type="submit">Confirmar</button>
-            </form>
-        </section>
+        .fato-card:hover::before { left: 100%; }
 
-        <footer>
-            <p>Com amor, <span class="fonte-script familia">Wilton e Wanessa</span>.</p>
-        </footer>
-    </div>
+        .fato-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(212,165,116,0.2);
+        }
 
-    <!-- ESTILOS ADICIONAIS -->
-    <style>
+        .fato-card p {
+            font-size: 0.95rem;
+            color: #555;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.5;
+        }
+
+        .fato-card .fato-emoji {
+            font-size: 1.6rem;
+            margin-right: 12px;
+        }
+
+        .btn-proximo-fato {
+            margin-top: 12px;
+            background: none;
+            border: 1.5px solid var(--cor-destaque);
+            color: var(--cor-destaque);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .btn-proximo-fato:hover {
+            background: var(--cor-destaque);
+            color: white;
+        }
+
+        /* ========== MENSAGEM ESPECIAL ========== */
+        .mensagem-section {
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        .mensagem-box {
+            background: linear-gradient(135deg, #fff8f4, var(--cor-creme));
+            border-radius: 20px;
+            padding: 24px;
+            border: 1.5px dashed rgba(212,165,116,0.4);
+            position: relative;
+        }
+
+        .mensagem-box::before {
+            content: '"';
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: rgba(212,165,116,0.15);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            line-height: 1;
+        }
+
+        .mensagem-box p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .mensagem-box .autor {
+            margin-top: 12px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: var(--cor-destaque);
+        }
+
+        /* ========== LISTA DE PRESENTES ========== */
         .gift-section {
-            padding: 25px 15px;
+            padding: 22px 15px;
             background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
             border-radius: 20px;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
         .gift-section h2 {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: var(--cor-destaque);
+            font-size: 1.3rem;
         }
 
         .gift-list {
@@ -493,82 +627,175 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
         }
 
         .gift-item {
             display: flex;
             align-items: center;
-            padding: 12px;
+            padding: 14px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1.5px solid #f5efe8;
+            transition: all 0.3s ease;
         }
 
         .gift-item:hover {
-            transform: scale(1.02);
+            transform: translateX(4px);
+            border-color: var(--cor-destaque);
+            box-shadow: 0 4px 18px rgba(212,165,116,0.15);
         }
 
         .gift-item img {
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             object-fit: contain;
-            margin-right: 15px;
+            margin-right: 14px;
         }
 
         .gift-item span {
             flex: 1;
-            text-align: left;
-            font-weight: 500;
-        }
-
-        .btn-ver {
-            padding: 8px 16px;
-            background: var(--cor-botao);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .btn-ver:hover {
-            background: #7a8f85;
+            font-weight: 600;
+            font-size: 0.92rem;
         }
 
         .pix-box {
-            margin-top: 25px;
-            padding: 15px;
+            margin-top: 20px;
+            padding: 18px;
             background: #fff;
             border: 2px dashed var(--cor-destaque);
-            border-radius: 10px;
+            border-radius: 14px;
+            text-align: center;
         }
 
-        .pix-box p {
-            font-size: 0.9rem;
-            color: #888;
-        }
+        .pix-box p { font-size: 0.85rem; color: #888; }
 
         .pix-box .chave {
             font-size: 1.1rem;
             color: #333;
             font-weight: bold;
             margin-top: 5px;
+            letter-spacing: 1px;
         }
 
+        .pix-box .copiar-btn {
+            margin-top: 10px;
+            background: var(--cor-botao);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .pix-box .copiar-btn:hover { background: #7a8f85; }
+
+        /* ========== BRINCADEIRA DE VOTAÇÃO ========== */
+        .jogo-section {
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        .jogo-section h2 {
+            font-size: 1.3rem;
+            color: var(--cor-destaque);
+            margin-bottom: 6px;
+        }
+
+        .jogo-section > p {
+            font-size: 0.83rem;
+            color: #bbb;
+            margin-bottom: 18px;
+        }
+
+        .pergunta-jogo {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(212,165,116,0.1);
+            border: 1.5px solid rgba(212,165,116,0.15);
+        }
+
+        .pergunta-jogo h3 {
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+            font-style: italic;
+            color: #444;
+        }
+
+        .opcoes-jogo {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .opcao-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--cor-destaque);
+            background: white;
+            color: var(--cor-destaque);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .opcao-btn:hover, .opcao-btn.selecionado {
+            background: var(--cor-destaque);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .resultado-jogo {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .resultado-jogo.visible { display: block; }
+
+        .barra-resultado {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .barra-resultado span:first-child { font-size: 0.82rem; color: #888; min-width: 80px; text-align: right; }
+        .barra-resultado span:last-child { font-size: 0.82rem; color: var(--cor-destaque); font-weight: 700; }
+
+        .barra-fill {
+            height: 10px;
+            background: linear-gradient(90deg, var(--cor-destaque), var(--cor-ouro));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .barra-track {
+            flex: 1;
+            background: #f5efe8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* ========== RSVP ========== */
         .rsvp-section {
             padding: 25px 15px;
             text-align: center;
         }
 
-        .rsvp-section h2 {
-            margin-bottom: 10px;
-        }
-
-        .rsvp-section>p {
-            color: #888;
-            margin-bottom: 20px;
-        }
+        .rsvp-section h2 { margin-bottom: 8px; }
+        .rsvp-section > p { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
 
         form {
             display: flex;
@@ -576,19 +803,16 @@
             gap: 12px;
         }
 
-        input,
-        select,
-        textarea {
+        input, select, textarea {
             padding: 14px;
             border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 15px;
             font-family: 'Lato', sans-serif;
+            transition: border-color 0.25s;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--cor-destaque);
         }
@@ -598,201 +822,440 @@
             background: linear-gradient(135deg, var(--cor-destaque) 0%, #c49464 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(212, 165, 116, 0.4);
+            box-shadow: 0 6px 18px rgba(212, 165, 116, 0.4);
+            transition: all 0.25s;
+            font-family: 'Lato', sans-serif;
         }
 
-        button[type="submit"]:hover {
-            transform: translateY(-2px);
-        }
+        button[type="submit"]:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(212,165,116,0.4); }
 
+        /* ========== FOOTER ========== */
         footer {
             text-align: center;
             padding: 30px;
             color: #bbb;
             font-size: 0.85rem;
+            border-top: 1px solid #f5ece4;
         }
 
         footer .familia {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--cor-destaque);
+            display: block;
+            margin-top: 4px;
         }
 
-        /* Mobile */
+        .footer-coracoes {
+            font-size: 1rem;
+            letter-spacing: 6px;
+            color: var(--cor-rosa);
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* ========== MOBILE ========== */
         @media (max-width: 600px) {
-            .container {
-                box-shadow: none;
-                padding: 10px;
-                border-radius: 0;
-            }
-
-            header {
-                padding: 40px 10px 20px;
-            }
-
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            header .nome-bebe {
-                font-size: 2.2rem;
-            }
-
-            header .data {
-                font-size: 1rem;
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .bebi-wrapper {
-                top: 650px;
-                right: 10px;
-                transform: scale(0.85);
-            }
-
-            .bebi-wrapper:active {
-                transform: scale(0.85) rotate(5deg);
-            }
-
-            .balao-fala {
-                left: -70px;
-                font-size: 11px;
-                padding: 8px 12px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
-            .info-card {
-                padding: 15px;
-                text-align: left;
-                display: flex;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .info-card i {
-                margin-bottom: 0;
-            }
-
-            .info-card:hover {
-                transform: none;
-                border-color: transparent;
-            }
-
-            .gift-item {
-                flex-wrap: wrap;
-            }
-
-            .gift-item span {
-                width: calc(100% - 60px);
-                margin-bottom: 8px;
-            }
-
-            .gift-item .btn-ver {
-                width: 100%;
-                text-align: center;
-            }
-
-            .rsvp-section {
-                padding: 20px 10px;
-            }
-
-            form {
-                gap: 10px;
-            }
+            .container { box-shadow: none; padding: 10px; border-radius: 0; }
+            header { padding: 40px 10px 20px; }
+            header h1 { font-size: 1.8rem; }
+            header .nome-bebe { font-size: 2.6rem; }
+            header .data { font-size: 0.95rem; flex-direction: column; gap: 5px; }
+            .info-grid { grid-template-columns: 1fr; gap: 8px; }
+            .info-card { padding: 15px; text-align: left; display: flex; align-items: center; gap: 15px; }
+            .info-card i { margin-bottom: 0; }
+            .info-card:hover { transform: none; border-color: transparent; }
+            .bebi-wrapper { bottom: 20px; right: 12px; transform: scale(0.88); }
+            .countdown-boxes { gap: 6px; }
+            .c-num { width: 54px; height: 54px; font-size: 1.7rem; }
+            .opcoes-jogo { gap: 8px; }
+            .opcao-btn { padding: 9px 16px; font-size: 0.85rem; }
         }
     </style>
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <!-- Corações animadas -->
-        <script>
-            // criar corações no fundo
-            for (let i = 0; i < 8; i++) {
-                criarCoracao();
-            }
+<div id="fundo-particulas"></div>
 
-            function criarCoracao() {
-                const coracao = document.createElement('div');
-                coracao.innerHTML = '❤';
-                coracao.className = 'coracao';
-                coracao.style.left = Math.random() * 100 + 'vw';
-                coracao.style.fontSize = (15 + Math.random() * 15) + 'px';
-                coracao.style.animationDuration = (4 + Math.random() * 4) + 's';
-                coracao.style.animationDelay = Math.random() * 5 + 's';
-                document.getElementById('fundo-coracoes').appendChild(coracao);
-            }
+<div class="container">
 
-            // Interatividade do Bibi
-            const frases = [
-                "Olá! ❤️",
-                "Que bom que clicou! 👶",
-                "Vou dar asinha! ✨",
-                "Beijinhos! 😘",
-                "Mal posso esperar! 🎉",
-                "Feliz com a visitinha! 💕"
-            ];
+    <!-- BIBI MELHORADO -->
+    <div class="bebi-wrapper" id="bebi" onclick="interagirBebi()">
+        <div class="zzz">zzz</div>
+        <div class="balao-fala" id="balao">Olá! ❤️</div>
+        <div class="bebi" id="corpo-bebi">
+            <div class="laco">
+                <div class="laco-centro"></div>
+            </div>
+            <div class="orelha orelha-esq"></div>
+            <div class="orelha orelha-dir"></div>
+            <div class="bebi-cabeca">
+                <div class="olhos-container">
+                    <div class="olho" id="olho-esq"></div>
+                    <div class="olho" id="olho-dir"></div>
+                </div>
+                <div class="bochecha bochecha-esq"></div>
+                <div class="bochecha bochecha-dir"></div>
+                <div class="boca"></div>
+            </div>
+            <div class="corpo"></div>
+        </div>
+    </div>
 
-            const bebis = document.getElementById('bebi');
-            const balao = document.getElementById('balao');
-            const corpoBebi = document.getElementById('corpo-bebi');
+    <!-- HEADER -->
+    <header>
+        <div class="badge-evento">🍼 Chá de Baby</div>
+        <h1>Bem-vindo ao Chá de</h1>
+        <h2 class="fonte-script nome-bebe">Levi</h2>
+        <div class="data"><i class="far fa-calendar-alt"></i>15 de Agosto de 2026 &bull; 15h00</div>
+    </header>
 
-            let timeoutBalao;
+    <!-- COUNTDOWN -->
+    <div class="countdown-section">
+        <p>⏳ Faltam para o grande dia</p>
+        <div class="countdown-boxes">
+            <div class="c-box"><div class="c-num" id="c-dias">--</div><div class="c-label">dias</div></div>
+            <div class="c-box"><div class="c-num" id="c-horas">--</div><div class="c-label">horas</div></div>
+            <div class="c-box"><div class="c-num" id="c-min">--</div><div class="c-label">minutos</div></div>
+            <div class="c-box"><div class="c-num" id="c-seg">--</div><div class="c-label">segundos</div></div>
+        </div>
+    </div>
 
-            function interagirBebi() {
-                // Animação de alegria
-                bebis.classList.add('feliz');
-                corpoBebi.classList.add('feliz');
+    <!-- INFO GRID -->
+    <section class="info-grid">
+        <div class="info-card">
+            <i class="far fa-clock"></i>
+            <div>
+                <h3>Horário</h3>
+                <p>15h às 19h</p>
+            </div>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+                <h3>Local</h3>
+                <p>R. Pastor Dong Joo Park, 165 – Hortolândia</p>
+            </div>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-gift"></i>
+            <div>
+                <h3>Dica</h3>
+                <p>Fraldas e roupinhas são sempre úteis!</p>
+            </div>
+        </div>
+    </section>
 
-                // Frase aleatória
-                const frase = frases[Math.floor(Math.random() * frases.length)];
-                balao.textContent = frase;
-                balao.classList.add('visible');
+    <!-- MENSAGEM ESPECIAL -->
+    <section class="mensagem-section">
+        <div class="mensagem-box">
+            <p>Uma nova vida está chegando para encher nossa casa de alegria, risos e amor. Levi, você já é o nosso maior tesouro — mal podemos esperar para te conhecer.</p>
+            <div class="autor">Com todo amor, Wilton & Wanessa 💛</div>
+        </div>
+    </section>
 
-                // Remove animação após 500ms
-                setTimeout(() => {
-                    bebis.classList.remove('feliz');
-                }, 500);
+    <!-- CURIOSIDADES DO BEBÊ -->
+    <section class="fatos-section">
+        <h2>✨ Você sabia?</h2>
+        <p>Curiosidades sobre bebês</p>
+        <div class="fato-card" id="fato-card" onclick="proximoFato()">
+            <span class="fato-emoji" id="fato-emoji">👶</span>
+            <p id="fato-texto">Bebês nascem com cerca de 270 ossos — mais do que adultos! Eles se fundem com o crescimento.</p>
+        </div>
+        <button class="btn-proximo-fato" onclick="proximoFato()">Próxima curiosidade →</button>
+    </section>
 
-                // Esconde balão após 2 segundos
-                clearTimeout(timeoutBalao);
-                timeoutBalao = setTimeout(() => {
-                    balao.classList.remove('visible');
-                    corpoBebi.classList.remove('feliz');
-                }, 2000);
-            }
+    <!-- BRINCADEIRA DE VOTAÇÃO -->
+    <section class="jogo-section">
+        <h2>🎲 Bora apostar?</h2>
+        <p>Qual é o seu palpite para o Levi?</p>
+        <div class="pergunta-jogo" id="pergunta-atual">
+            <h3 id="pergunta-texto">Com quem o Levi vai se parecer mais?</h3>
+            <div class="opcoes-jogo" id="opcoes-container"></div>
+            <div class="resultado-jogo" id="resultado-jogo"></div>
+        </div>
+    </section>
 
-            // Olhos seguem o mouse
-            document.addEventListener('mousemove', (e) => {
-                const olhos = document.querySelectorAll('.olho');
-                const rect = bebis.getBoundingClientRect();
-                const centroBebi = {
-                    x: rect.left + 30,
-                    y: rect.top + 25
-                };
+    <!-- LISTA DE PRESENTES -->
+    <section class="gift-section">
+        <h2><i class="fas fa-baby"></i> Lista de Presentes</h2>
+        <ul class="gift-list">
+            <li class="gift-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/1702/1702254.png" alt="Fraldas">
+                <span>Kit Fraldas</span>
+            </li>
+            <li class="gift-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/7154/7154822.png" alt="Pomada">
+                <span>Kit Saúde Bebê</span>
+            </li>
+            <li class="gift-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/5618/5618184.png" alt="Mamadeira">
+                <span>Kit Amamentação</span>
+            </li>
+            <li class="gift-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/4464/4464131.png" alt="Roupinha">
+                <span>Conjunto Macacãozinho</span>
+            </li>
+        </ul>
+        <div class="pix-box">
+            <p>💛 Ou contribua via PIX</p>
+            <p class="chave">(19) 98858-5953</p>
+            <button class="copiar-btn" onclick="copiarPix()">📋 Copiar chave</button>
+        </div>
+    </section>
 
-                olhos.forEach(olho => {
-                    const dx = e.clientX - centroBebi.x;
-                    const dy = e.clientY - centroBebi.y;
-                    const distancia = Math.min(3, Math.sqrt(dx * dx + dy * dy) / 50);
-                    const angulo = Math.atan2(dy, dx);
+    <!-- RSVP -->
+    <section class="rsvp-section">
+        <h2>Confirme sua Presença</h2>
+        <p>Contamos com você nesse dia tão especial! 🎀</p>
+        <form action="https://formspree.io/f/SEU_CODIGO" method="POST">
+            <input type="text" name="nome" placeholder="Seu Nome" required>
+            <select name="confirmacao">
+                <option value="Sim">✔️ Sim, vou comparecer!</option>
+                <option value="Não">❌ Não poderei ir</option>
+            </select>
+            <input type="number" name="acompanhantes" placeholder="Quantos acompanhantes?" min="0">
+            <textarea name="mensagem" placeholder="Deixe uma mensagem carinhosa para o Levi 💛" rows="3"></textarea>
+            <button type="submit">Confirmar Presença 🎀</button>
+        </form>
+    </section>
 
-                    const moveX = Math.cos(angulo) * distancia;
-                    const moveY = Math.sin(angulo) * distancia;
+    <footer>
+        <p>Feito com amor para</p>
+        <span class="fonte-script familia">Wilton e Wanessa</span>
+        <span class="footer-coracoes">♥ ♥ ♥</span>
+    </footer>
+</div>
 
-                    olho.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                });
+<script>
+    /* ===== PARTÍCULAS ===== */
+    const tiposParticula = ['❤', '✨', '🌸', '💛', '⭐', '🍼'];
+    for (let i = 0; i < 14; i++) {
+        const p = document.createElement('div');
+        p.className = 'particula';
+        p.textContent = tiposParticula[Math.floor(Math.random() * tiposParticula.length)];
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.fontSize = (12 + Math.random() * 16) + 'px';
+        p.style.animationDuration = (7 + Math.random() * 8) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        document.getElementById('fundo-particulas').appendChild(p);
+    }
+
+    /* ===== COUNTDOWN ===== */
+    function atualizarCountdown() {
+        const evento = new Date('2026-08-15T15:00:00');
+        const agora = new Date();
+        const diff = evento - agora;
+
+        if (diff <= 0) {
+            document.getElementById('c-dias').textContent = '🎉';
+            document.getElementById('c-horas').textContent = '🎉';
+            document.getElementById('c-min').textContent = '🎉';
+            document.getElementById('c-seg').textContent = '🎉';
+            return;
+        }
+
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seg = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('c-dias').textContent = String(dias).padStart(2, '0');
+        document.getElementById('c-horas').textContent = String(horas).padStart(2, '0');
+        document.getElementById('c-min').textContent = String(min).padStart(2, '0');
+        document.getElementById('c-seg').textContent = String(seg).padStart(2, '0');
+    }
+
+    atualizarCountdown();
+    setInterval(atualizarCountdown, 1000);
+
+    /* ===== BIBI ===== */
+    const frases = [
+        "Olá! ❤️",
+        "Que bom que veio! 👶",
+        "Tô ansioso! ✨",
+        "Beijinhos! 😘",
+        "Mal posso esperar! 🎉",
+        "Feliz com a visita! 💕",
+        "Vem me conhecer! 🍼",
+        "Agosto chegando! 🌸"
+    ];
+
+    const bebiEl = document.getElementById('bebi');
+    const balao = document.getElementById('balao');
+    const corpoBebi = document.getElementById('corpo-bebi');
+    let timeoutBalao, timeoutDormir, interacoesCount = 0;
+
+    function interagirBebi() {
+        bebiEl.classList.remove('dormindo');
+        clearTimeout(timeoutDormir);
+
+        corpoBebi.classList.add('feliz');
+        bebiEl.classList.add('feliz');
+
+        const frase = frases[Math.floor(Math.random() * frases.length)];
+        balao.textContent = frase;
+        balao.classList.add('visible');
+
+        interacoesCount++;
+        if (interacoesCount % 5 === 0) {
+            balao.textContent = "Você me clicou " + interacoesCount + "x! 😂";
+        }
+
+        setTimeout(() => { bebiEl.classList.remove('feliz'); }, 500);
+
+        clearTimeout(timeoutBalao);
+        timeoutBalao = setTimeout(() => {
+            balao.classList.remove('visible');
+            corpoBebi.classList.remove('feliz');
+        }, 2500);
+
+        // Adormecer após 8s sem interação
+        timeoutDormir = setTimeout(() => {
+            bebiEl.classList.add('dormindo');
+        }, 8000);
+    }
+
+    // Começa dormindo depois de 4s
+    timeoutDormir = setTimeout(() => {
+        bebiEl.classList.add('dormindo');
+    }, 4000);
+
+    // Olhos seguem o cursor
+    document.addEventListener('mousemove', (e) => {
+        const olhos = document.querySelectorAll('.olho');
+        const rect = bebiEl.getBoundingClientRect();
+        const centroBebi = { x: rect.left + 34, y: rect.top + 25 };
+
+        olhos.forEach(olho => {
+            const dx = e.clientX - centroBebi.x;
+            const dy = e.clientY - centroBebi.y;
+            const dist = Math.min(3, Math.sqrt(dx * dx + dy * dy) / 50);
+            const ang = Math.atan2(dy, dx);
+            olho.style.transform = `translate(${Math.cos(ang) * dist}px, ${Math.sin(ang) * dist}px)`;
+        });
+    });
+
+    /* ===== CURIOSIDADES ===== */
+    const fatos = [
+        { emoji: '👶', texto: 'Bebês nascem com cerca de 270 ossos — mais do que adultos! Eles se fundem com o crescimento.' },
+        { emoji: '👁️', texto: 'Recém-nascidos só enxergam nitidamente a cerca de 20–30 cm — exatamente a distância do rosto de quem os amamenta.' },
+        { emoji: '💤', texto: 'Nos primeiros meses, bebês dormem até 17 horas por dia. Crescer dá trabalho!' },
+        { emoji: '🫀', texto: 'O coração de um bebê bate entre 120 e 160 vezes por minuto — quase duas vezes o de um adulto.' },
+        { emoji: '🧠', texto: 'Ao nascer, o cérebro do bebê tem 100 bilhões de neurônios — o mesmo que um adulto!' },
+        { emoji: '👃', texto: 'Bebês reconhecem o cheiro da mãe logo nas primeiras horas de vida.' },
+        { emoji: '😂', texto: 'Bebês começam a sorrir de verdade entre 6 e 8 semanas — e derretem qualquer um!' },
+        { emoji: '🎵', texto: 'Bebês se acalmam com músicas num ritmo parecido com os batimentos cardíacos da mãe.' },
+    ];
+
+    let fatoAtual = 0;
+
+    function proximoFato() {
+        fatoAtual = (fatoAtual + 1) % fatos.length;
+        const f = fatos[fatoAtual];
+        const card = document.getElementById('fato-card');
+        card.style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('fato-emoji').textContent = f.emoji;
+            document.getElementById('fato-texto').textContent = f.texto;
+            card.style.opacity = '1';
+            card.style.transition = 'opacity 0.4s';
+        }, 200);
+    }
+
+    /* ===== JOGO DE VOTAÇÃO ===== */
+    const perguntas = [
+        {
+            texto: 'Com quem o Levi vai se parecer mais?',
+            opcoes: ['Com o papai 👨', 'Com a mamãe 👩', 'Igual ao avô 👴', 'É um mistério! 🎲']
+        },
+        {
+            texto: 'Qual será o primeiro hobby do Levi?',
+            opcoes: ['Futebol ⚽', 'Música 🎵', 'Arte 🎨', 'Games 🎮']
+        },
+        {
+            texto: 'Como será a personalidade do Levi?',
+            opcoes: ['Extrovertido 🎉', 'Timidinho 🌸', 'Curioso 🔍', 'Dorminhoco 😴']
+        }
+    ];
+
+    const votos = perguntas.map(p => new Array(p.opcoes.length).fill(0));
+    let perguntaAtual = 0;
+    let votouNessa = false;
+
+    function renderizarPergunta() {
+        const p = perguntas[perguntaAtual];
+        document.getElementById('pergunta-texto').textContent = p.texto;
+        const cont = document.getElementById('opcoes-container');
+        cont.innerHTML = '';
+        p.opcoes.forEach((op, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'opcao-btn';
+            btn.textContent = op;
+            btn.onclick = () => votar(i);
+            cont.appendChild(btn);
+        });
+        document.getElementById('resultado-jogo').classList.remove('visible');
+        votouNessa = false;
+    }
+
+    function votar(idx) {
+        if (votouNessa) return;
+        votouNessa = true;
+
+        votos[perguntaAtual][idx]++;
+        // Adiciona alguns votos fictícios para parecer animado
+        votos[perguntaAtual].forEach((_, i) => {
+            if (i !== idx) votos[perguntaAtual][i] += Math.floor(Math.random() * 5) + 1;
+        });
+
+        const total = votos[perguntaAtual].reduce((a, b) => a + b, 0);
+        const p = perguntas[perguntaAtual];
+        const res = document.getElementById('resultado-jogo');
+        res.innerHTML = '<p style="font-weight:700;color:#888;margin-bottom:8px;">Resultado dos palpites 🎯</p>';
+
+        p.opcoes.forEach((op, i) => {
+            const pct = Math.round((votos[perguntaAtual][i] / total) * 100);
+            res.innerHTML += `
+                <div class="barra-resultado">
+                    <span>${op.split(' ').slice(-1)}</span>
+                    <div class="barra-track"><div class="barra-fill" style="width:0%" data-pct="${pct}"></div></div>
+                    <span>${pct}%</span>
+                </div>`;
+        });
+
+        res.classList.add('visible');
+        setTimeout(() => {
+            res.querySelectorAll('.barra-fill').forEach(b => {
+                b.style.width = b.dataset.pct + '%';
             });
+        }, 50);
 
+        // Próxima pergunta após 4s
+        setTimeout(() => {
+            perguntaAtual = (perguntaAtual + 1) % perguntas.length;
+            renderizarPergunta();
+        }, 4000);
 
-        </script>
-    </body>
+        // Marcar botão clicado
+        document.querySelectorAll('.opcao-btn')[idx].classList.add('selecionado');
+    }
 
+    renderizarPergunta();
+
+    /* ===== PIX COPIAR ===== */
+    function copiarPix() {
+        navigator.clipboard.writeText('(19) 98858-5953').then(() => {
+            const btn = document.querySelector('.copiar-btn');
+            btn.textContent = '✅ Copiado!';
+            setTimeout(() => { btn.textContent = '📋 Copiar chave'; }, 2000);
+        });
+    }
+</script>
+
+</body>
 </html>
