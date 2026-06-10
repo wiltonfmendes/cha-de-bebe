@@ -1200,6 +1200,58 @@
             box-shadow: 0 10px 24px rgba(212, 165, 116, 0.4);
         }
 
+        button[type="submit"]:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* CONFIRMAÇÃO DE PRESENÇA */
+        .rsvp-sucesso {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f5fef7, #edfbf2);
+            border: 2px solid #a8d5b5;
+            border-radius: 20px;
+            animation: fadeIn 0.6s ease;
+            text-align: center;
+        }
+
+        .rsvp-sucesso.visible {
+            display: flex;
+        }
+
+        .rsvp-sucesso-icone {
+            font-size: 3.5rem;
+            animation: pularIcone 0.7s ease;
+        }
+
+        @keyframes pularIcone {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.25); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .rsvp-sucesso h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            color: var(--cor-destaque);
+        }
+
+        .rsvp-sucesso p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .rsvp-sucesso .rsvp-nome-confirmado {
+            font-weight: 700;
+            color: var(--cor-destaque);
+        }
+
         /* FOOTER */
         footer {
             text-align: center;
@@ -1495,9 +1547,9 @@
         <section class="rsvp-section">
             <h2>Confirme sua Presença</h2>
             <p>Contamos com você nesse dia tão especial! 🎀</p>
-            <form action="https://api.web3forms.com/submit" method="POST">
+            <form id="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="04a6db0a-4b21-4515-85e8-edd02efc227a">
-                <input type="text" name="name" required placeholder="Seu Nome">
+                <input type="text" name="name" id="rsvp-nome" required placeholder="Seu Nome">
                 <input type="tel" name="telefone" required placeholder="Seu Celular (com DDD)">
                 <label for="confirmacao"
                     style="text-align:left;font-size:0.88rem;color:#aaa;font-weight:600;letter-spacing:0.5px;">Confirme
@@ -1510,8 +1562,17 @@
                 <input type="number" name="acompanhantes" placeholder="Quantos acompanhantes?" min="0">
                 <textarea name="message" placeholder="Deixe uma mensagem carinhosa para o Levi 💛" rows="3"
                     required></textarea>
-                <button type="submit">Confirmar Presença 🎀</button>
+                <button type="submit" id="rsvp-btn">Confirmar Presença 🎀</button>
             </form>
+
+            <!-- MENSAGEM DE SUCESSO -->
+            <div class="rsvp-sucesso" id="rsvp-sucesso">
+                <div class="rsvp-sucesso-icone">🎀</div>
+                <h3>Presença confirmada!</h3>
+                <p>Que alegria, <span class="rsvp-nome-confirmado" id="rsvp-nome-exibido"></span>! 💛<br>
+                O Levi e a família estão ansiosos para te ver no grande dia!</p>
+                <p style="font-size:0.83rem;color:#aaa;">📅 01 de Agosto de 2026 &bull; 15h00</p>
+            </div>
         </section>
 
         <footer>
@@ -1786,6 +1847,50 @@
                 setTimeout(() => { btn.textContent = '📋 Copiar chave'; }, 2000);
             });
         }
+
+        /* ===== RSVP — envio via fetch sem redirecionar ===== */
+        document.getElementById('rsvp-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const btn = document.getElementById('rsvp-btn');
+            const nome = document.getElementById('rsvp-nome').value.trim();
+
+            // Feedback visual no botão
+            btn.disabled = true;
+            btn.textContent = 'Enviando... ⏳';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Esconde o formulário
+                    form.style.display = 'none';
+
+                    // Preenche o nome e exibe a mensagem de sucesso
+                    document.getElementById('rsvp-nome-exibido').textContent = nome || 'convidado(a)';
+                    const sucesso = document.getElementById('rsvp-sucesso');
+                    sucesso.classList.add('visible');
+
+                    // Rola suavemente até a mensagem
+                    sucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Confirmar Presença 🎀';
+                    alert('Ops! Algo deu errado. Tente novamente.');
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Confirmar Presença 🎀';
+                alert('Erro de conexão. Verifique sua internet e tente novamente.');
+            }
+        });
     </script>
 
 </body>
