@@ -832,7 +832,7 @@
                     Abrir no Google Maps
                 </a>
                 <a class="modal-nav-btn modal-nav-btn-waze"
-                   href="https://ul.waze.com/ul?place=ChIJYYR4KYfIyJQRJVeiFQH4rK0&ll=-22.90682350%2C-47.09422970&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
+                   href="https://waze.com/ul?q=R.+Prof.+João+Augusto+de+Toledo+731+Campinas+SP&navigate=yes"
                    target="_blank" rel="noopener">
                     <img src="https://cdn-icons-png.flaticon.com/128/4824/4824788.png" alt="Waze">
                     Abrir no Waze
@@ -914,7 +914,7 @@
 
         <div class="info-card">
             <i class="fas fa-gift"></i>
-            <div><h3>Dica</h3><p>Fraldas (M, G e GG) e roupinhas são sempre úteis!</p></div>
+            <div><h3>Dica</h3><p>Fraldas e roupinhas são sempre úteis!</p></div>
         </div>
     </section>
 
@@ -1290,13 +1290,17 @@ const FIREBASE_CONFIG = {
 
 // Presentes fixos (id único por item)
 const PRESENTES = [
-    { id: "banheira",   nome: "Banheira com Suporte",            emoji: "🛁" },
-    { id: "kithigiene", nome: "Kit Higiene — Unha e Cabelo",     emoji: "✂️" },
-    { id: "bebeconf",   nome: "Bebê Conforto",                   emoji: "🚗" },
-    { id: "bolsamat",   nome: "Kit Bolsa Maternidade",           emoji: "👜" },
-    { id: "kitorg",     nome: "Kit Organizador de Higiene",      emoji: "🧴" },
-    { id: "kitberco",   nome: "Kit Berço",                       emoji: "🛏️" },
-    { id: "baba",       nome: "Babá Eletrônica com Monitor",     emoji: "📷" },
+    { id: "banheira",   nome: "Banheira com Suporte",                        emoji: "🛁" },
+    { id: "kithigiene", nome: "Kit Higiene — Unha e Cabelo",                 emoji: "✂️" },
+    { id: "bebeconf",   nome: "Bebê Conforto",                               emoji: "🚗" },
+    { id: "bolsamat",   nome: "Kit Bolsa Maternidade",                       emoji: "👜" },
+    { id: "kitorg",     nome: "Kit Organizador de Higiene",                  emoji: "🧴" },
+    { id: "kitberco",   nome: "Kit Berço",                                   emoji: "🛏️" },
+    { id: "baba",       nome: "Babá Eletrônica com Monitor",                 emoji: "📷" },
+    { id: "cueiro",     nome: "Kit Fralda de Pano ou Cueiro",                emoji: "🧺" },
+    { id: "kitbuba",    nome: "Kit Escova e Mamadeira Buba",                 emoji: "🍼" },
+    { id: "bodys",      nome: "Kit Bodys Manga Curta ou Macacão de Zíper (M, G)", emoji: "👕" },
+    { id: "naninha",    nome: "Naninhas",                                    emoji: "🧸" },
 ];
 
 // Estado local
